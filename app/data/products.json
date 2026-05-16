@@ -1,0 +1,114 @@
+[
+  {
+    "title": "Emma Hoops",
+    "description": "Aretes de aro en baño de oro de 14k con acabado pulido. Un básico elegante para el día a día.",
+    "price": "$320",
+    "image": "demo.jpg",
+    "gallery": ["demo.jpg", "demo_1.png", "demo_2.png"]
+  },
+  {
+    "title": "Luna Pendant",
+    "description": "Collar con dije de media luna en plata .925 y cadena delicada de 45 cm. Pieza minimalista y atemporal.",
+    "price": "$485",
+    "image": "demo_2.png",
+    "gallery": ["demo.jpg", "demo_1.png", "demo_2.png"]
+  },
+  {
+    "title": "Stella Ring",
+    "description": "Anillo solitario con zirconia central montada en oro rosa. Brillo sutil para ocasiones especiales.",
+    "price": "$890",
+    "image": "demo_1.png",
+    "gallery": ["demo.jpg", "demo_1.png", "demo_2.png"]
+  },
+  {
+    "title": "Rosé Bangle",
+    "description": "Brazalete rígido en oro rosa con cierre de seguridad. Diseño limpio que combina con todo.",
+    "price": "$260",
+    "image": "demo_2.png",
+    "gallery": ["demo.jpg", "demo_1.png", "demo_2.png"]
+  },
+  {
+    "title": "Pearl Choker",
+    "description": "Gargantilla de perlas de río con broche dorado. Sofisticación clásica para looks formales.",
+    "price": "$375",
+    "image": "demo_1.png",
+    "gallery": ["demo.jpg", "demo_1.png", "demo_2.png"]
+  },
+  {
+    "title": "Aurora Studs",
+    "description": "Studs con cristales facetados que captan la luz. Perfectos para iluminar el rostro sin exceso.",
+    "price": "$195",
+    "image": "demo_2.png",
+    "gallery": ["demo.jpg", "demo_1.png", "demo_2.png"]
+  },
+  {
+    "title": "Midnight Cuff",
+    "description": "Brazalete abierto en plata con detalle grabado. Actitud moderna con acabado artesanal.",
+    "price": "$310",
+    "image": "demo_1.png",
+    "gallery": ["demo.jpg", "demo_1.png", "demo_2.png"]
+  },
+  {
+    "title": "Ivy Chain",
+    "description": "Collar de capas con tres cadenas doradas a distintas longitudes. Ideal para looks en capas.",
+    "price": "$298",
+    "image": "demo_2.png",
+    "gallery": ["demo.jpg", "demo_1.png", "demo_2.png"]
+  },
+  {
+    "title": "Opal Drops",
+    "description": "Aretes colgantes con ópalo sintético y gancho de oro. Movimiento suave y color iridiscente.",
+    "price": "$356",
+    "image": "demo_1.png",
+    "gallery": ["demo.jpg", "demo_1.png", "demo_2.png"]
+  },
+  {
+    "title": "Dalia Anklet",
+    "description": "Tobillera fina con dijes florales en dorado. Detalle delicado para sandalias y vestidos.",
+    "price": "$145",
+    "image": "demo_2.png",
+    "gallery": ["demo.jpg", "demo_1.png", "demo_2.png"]
+  },
+  {
+    "title": "Marina Pearls",
+    "description": "Aretes de perla barroca con base dorada. Contraste orgánico entre lo clásico y lo contemporáneo.",
+    "price": "$275",
+    "image": "demo_1.png",
+    "gallery": ["demo.jpg", "demo_1.png", "demo_2.png"]
+  },
+  {
+    "title": "Blush Bracelet",
+    "description": "Pulsera elástica con cuentas de cristal en tonos blush y dorado. Color y textura en la muñeca.",
+    "price": "$132",
+    "image": "demo_2.png",
+    "gallery": ["demo.jpg", "demo_1.png", "demo_2.png"]
+  },
+  {
+    "title": "Celeste Hairpin",
+    "description": "Pinza para cabello con perlas y cristales. Accesorio statement para recogidos y media cola.",
+    "price": "$118",
+    "image": "demo_1.png",
+    "gallery": ["demo.jpg", "demo_1.png", "demo_2.png"]
+  },
+  {
+    "title": "Velvet Clutch",
+    "description": "Clutch de terciopelo con cadena dorada desmontable. Compañera ideal para noches y eventos.",
+    "price": "$220",
+    "image": "demo_2.png",
+    "gallery": ["demo.jpg", "demo_1.png", "demo_2.png"]
+  },
+  {
+    "title": "Silk Scarf",
+    "description": "Pañuelo de seda estampado en tonos cálidos. Accesorio versátil para cuello, bolso o cabello.",
+    "price": "$168",
+    "image": "demo_1.png",
+    "gallery": ["demo.jpg", "demo_1.png", "demo_2.png"]
+  },
+  {
+    "title": "Golden Hour Set",
+    "description": "Set de collar y aretes en baño de oro con diseño geométrico. Look coordinado sin esfuerzo.",
+    "price": "$540",
+    "image": "demo_2.png",
+    "gallery": ["demo.jpg", "demo_1.png", "demo_2.png"]
+  }
+]
