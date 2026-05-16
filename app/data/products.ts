@@ -13,6 +13,7 @@ function resolveGallery(raw: RawProduct): string[] {
 export const products: Product[] = (rawProducts as RawProduct[]).map((product) => ({
   title: product.title,
   description: product.description,
+  category: product.category,
   price: product.price,
   image: resolveImage(product.image),
   gallery: resolveGallery(product),

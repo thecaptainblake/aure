@@ -67,22 +67,7 @@ const emit = defineEmits(['open-gallery'])
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500&family=Inter:wght@300;400&display=swap');
-
-p {
-  margin: 0;
-}
-
-h1 {
-  margin: 0;
-}
-
-.product-card {
-  padding: 1.5rem;
-  border-radius: 1rem;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
-  background-color: #eeeeee;
-}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap');
 
 .image-section {
   position: relative;
@@ -90,17 +75,12 @@ h1 {
   width: 100%;
   padding: 0;
   border: none;
-  border-radius: 0.5rem;
+  border-radius: 0.2rem;
   aspect-ratio: 1/1;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   cursor: pointer;
   background: none;
-  transition: transform 0.3s ease-in-out;
-
-  &:hover {
-    transform: rotate(0.5deg);
-  }
 }
 
 .main-image {
@@ -110,7 +90,8 @@ h1 {
   transition: transform 0.3s ease-in-out;
 
   .image-section:hover & {
-    transform: scale(1.05);
+    transform: scale(1.1);
+
   }
 }
 
@@ -119,22 +100,24 @@ h1 {
 }
 
 .product-title {
-  font-family: 'Syne', sans-serif;
+  font-family: var(--font-family-nesans);
   font-size: 1.5rem;
   font-weight: 400;
-  color: #1a1a1a;
+  color: #8f744f;
   text-transform: lowercase;
-  margin-bottom: 0.5rem;
+  margin: 0
 }
 
 .description {
-  font-family: 'Inter', sans-serif;
-  font-size: 0.8rem;
+  font-family: var(--font-family-avenir);
+  font-weight: 300;
+  font-size: 0.9rem;
   line-height: 1.4;
-  color: #4a4a4a;
+  color: #b49577;
   max-width: 350px;
   margin-left: auto;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
 }
 
 .action-bar {
@@ -151,27 +134,27 @@ h1 {
   padding: 0;
   border: none;
   background: none;
-  color: #1a1a1a;
+  color: #b69778;
   cursor: pointer;
   transition: color 0.2s ease;
 
   &:hover {
-    color: #ab8e74;
+    color: #8f744f;
   }
 
   &.is-favorite {
-    color: #e53935;
+    color: #8f744f;
 
     &:hover {
-      color: #c62828;
+      color: #ab8e74;
     }
   }
 }
 
 .price {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-family-avenir);
   font-size: 1.2rem;
-  font-weight: 700;
-  color: #1a1a1a;
+  font-weight: 500;
+  color: #8f744f;
 }
 </style>
