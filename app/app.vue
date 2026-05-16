@@ -54,7 +54,7 @@ import { products } from '~/data/products'
 const { visible: lightboxVisible, images: lightboxImages, index: lightboxIndex, open: openLightbox, close: closeLightbox } = useLightbox()
 
 const whatsappUrl = 'https://wa.me/528119775806'
-const instagramUrl = 'https://instagram.com/aure'
+const instagramUrl = 'https://instagram.com/aure.mty'
 </script>
 
 <style scoped>
