@@ -44,9 +44,11 @@ export default defineNuxtConfig({
       ]
     },
   },
-  modules: ['@nuxt/icon', '@nuxt/image'],
+  modules: ['@nuxt/icon', '@nuxt/image', 'motion-v/nuxt'],
   css: [
     'normalize.css/normalize.css',
     '~/assets/css/fonts.css',
+    'vue3-carousel/carousel.css',
+    
   ],
 })

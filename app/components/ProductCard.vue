@@ -1,26 +1,25 @@
 <template>
   <div class="product-card">
-    <button
-      type="button"
-      class="image-section"
-      :aria-label="`Ver fotos de ${title}`"
-      @click="emit('open-gallery', gallery)"
-    >
-      <NuxtImg
-        :src="image"
-        :alt="title"
-        loading="lazy"
-        class="main-image"
-      />
-    </button>
+    <div class="image-section">
+      <ClientOnly>
+        <Carousel :items-to-show="1" :wrap-around="slides.length > 1" class="carousel">
+          <Slide v-for="(src, i) in slides" :key="src">
+            <NuxtImg :src="src" :alt="`${title} ${i + 1}`" loading="lazy" class="slide-image" />
+          </Slide>
+          <template v-if="slides.length > 1" #addons>
+            <Navigation />
+            <Pagination />
+          </template>
+        </Carousel>
+        <template #fallback>
+          <NuxtImg :src="image" :alt="title" loading="lazy" class="slide-image" />
+        </template>
+      </ClientOnly>
+    </div>
 
     <div class="info-section">
       <h1 class="product-title">{{ title }}</h1>
-
-      <p class="description">
-        {{ description }}
-      </p>
-
+      <p class="description">{{ description }}</p>
       <div class="action-bar">
         <button
           type="button"
@@ -38,61 +37,50 @@
 </template>
 
 <script setup>
-const isFavorite = ref(false)
+import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
 
-defineProps({
-  title: {
-    type: String,
-    required: true,
-  },
-  description: {
-    type: String,
-    required: true,
-  },
-  price: {
-    type: String,
-    required: true,
-  },
-  image: {
-    type: String,
-    required: true,
-  },
-  gallery: {
-    type: Array,
-    required: true,
-  },
+const props = defineProps({
+  title: { type: String, required: true },
+  description: { type: String, required: true },
+  price: { type: String, required: true },
+  image: { type: String, required: true },
+  gallery: { type: Array, required: true },
 })
 
-const emit = defineEmits(['open-gallery'])
+const isFavorite = ref(false)
+const slides = computed(() => [...new Set([props.image, ...props.gallery])])
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap');
-
 .image-section {
-  position: relative;
   overflow: hidden;
   width: 100%;
-  padding: 0;
-  border: none;
   border-radius: 0.2rem;
-  aspect-ratio: 1/1;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  aspect-ratio: 1 / 1;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   margin-bottom: 0.5rem;
-  cursor: pointer;
-  background: none;
 }
 
-.main-image {
+.carousel,
+.carousel :deep(.carousel__viewport) {
+  height: 100%;
+}
+
+.slide-image {
   width: 100%;
   height: 100%;
   display: block;
-  transition: transform 0.3s ease-in-out;
+  object-fit: cover;
+}
 
-  .image-section:hover & {
-    transform: scale(1.1);
+.carousel :deep(.carousel__pagination-button) {
+  background-color: #d3b59f;
+}
 
-  }
+.carousel :deep(.carousel__pagination-button--active),
+.carousel :deep(.carousel__prev),
+.carousel :deep(.carousel__next) {
+  color: #8f744f;
 }
 
 .info-section {
@@ -105,7 +93,7 @@ const emit = defineEmits(['open-gallery'])
   font-weight: 400;
   color: #8f744f;
   text-transform: lowercase;
-  margin: 0
+  margin: 0;
 }
 
 .description {
@@ -115,9 +103,7 @@ const emit = defineEmits(['open-gallery'])
   line-height: 1.4;
   color: #b49577;
   max-width: 350px;
-  margin-left: auto;
-  margin-bottom: 0.5rem;
-  margin-top: 0.5rem;
+  margin: 0.5rem 0 0.5rem auto;
 }
 
 .action-bar {
@@ -129,8 +115,6 @@ const emit = defineEmits(['open-gallery'])
 
 .icon-button {
   display: flex;
-  align-items: center;
-  justify-content: center;
   padding: 0;
   border: none;
   background: none;
@@ -144,10 +128,6 @@ const emit = defineEmits(['open-gallery'])
 
   &.is-favorite {
     color: #8f744f;
-
-    &:hover {
-      color: #ab8e74;
-    }
   }
 }
 
