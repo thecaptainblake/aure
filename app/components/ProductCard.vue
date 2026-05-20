@@ -1,20 +1,24 @@
 <template>
   <div class="product-card">
     <div class="image-section">
-      <ClientOnly>
-        <Carousel :items-to-show="1" :wrap-around="slides.length > 1" class="carousel">
-          <Slide v-for="(src, i) in slides" :key="src">
-            <NuxtImg :src="src" :alt="`${title} ${i + 1}`" loading="lazy" class="slide-image" />
-          </Slide>
-          <template v-if="slides.length > 1" #addons>
-            <Navigation />
-            <Pagination />
-          </template>
-        </Carousel>
-        <template #fallback>
-          <NuxtImg :src="image" :alt="title" loading="lazy" class="slide-image" />
+      <Carousel
+        :items-to-show="1"
+        :wrap-around="slides.length > 1"
+        class="carousel"
+      >
+        <Slide v-for="(src, i) in slides" :key="src">
+          <NuxtImg
+            :src="src"
+            :alt="`${title} ${i + 1}`"
+            loading="lazy"
+            class="slide-image"
+          />
+        </Slide>
+        <template #addons>
+          <Navigation />
+          <Pagination />
         </template>
-      </ClientOnly>
+      </Carousel>
     </div>
 
     <div class="info-section">
@@ -25,10 +29,15 @@
           type="button"
           class="icon-button"
           :class="{ 'is-favorite': isFavorite }"
-          :aria-label="isFavorite ? 'Quitar de favoritos' : 'Agregar a favoritos'"
+          :aria-label="
+            isFavorite ? 'Quitar de favoritos' : 'Agregar a favoritos'
+          "
           @click="isFavorite = !isFavorite"
         >
-          <Icon :name="isFavorite ? 'mdi:heart' : 'mdi:heart-outline'" size="22" />
+          <Icon
+            :name="isFavorite ? 'mdi:heart' : 'mdi:heart-outline'"
+            size="22"
+          />
         </button>
         <span class="price">{{ price }}</span>
       </div>
@@ -37,7 +46,7 @@
 </template>
 
 <script setup>
-import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
+import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
 
 const props = defineProps({
   title: { type: String, required: true },
@@ -45,10 +54,10 @@ const props = defineProps({
   price: { type: String, required: true },
   image: { type: String, required: true },
   gallery: { type: Array, required: true },
-})
+});
 
-const isFavorite = ref(false)
-const slides = computed(() => [...new Set([props.image, ...props.gallery])])
+const isFavorite = ref(false);
+const slides = computed(() => [...new Set([props.image, ...props.gallery])]);
 </script>
 
 <style scoped>

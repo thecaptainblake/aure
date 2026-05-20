@@ -14,7 +14,7 @@
     <motion.div class="product-pill-filters"        
         :initial="{ opacity: 0, y: -15 }"
         :animate="{ opacity: 1, y: 0 }"
-        :transition="{ duration: 0.5, delay: 1 }">
+        :transition="{ duration: 0.5, delay: 0.5 }">
         <div
           v-for="(cat, index) in categories"
           :key="cat"
@@ -34,7 +34,7 @@
         :initial="{ opacity: 0, y: 20}"
         :while-in-view="{ opacity: 1, y: 0 }"
         :in-view-options="{ once: true }"
-        :transition="{ duration: 0.5, delay: 0.5  }"
+        :transition="{ duration: 0.5 }"
       >
         <ProductCard
           :title="product.title"
@@ -49,7 +49,7 @@
       :initial="{ opacity: 0, y: 20}"
       :while-in-view="{ opacity: 1, y: 0 }"
       :in-view-options="{ once: true }"
-      :transition="{ duration: 0.5, delay: 0.3  }"
+      :transition="{ duration: 0.5 }"
     >
       <a
         :href="instagramUrl"
