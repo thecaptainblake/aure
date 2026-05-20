@@ -49,7 +49,7 @@
       :initial="{ opacity: 0, y: 20}"
       :while-in-view="{ opacity: 1, y: 0 }"
       :in-view-options="{ once: true }"
-      :transition="{ duration: 0.5  }"
+      :transition="{ duration: 0.5, delay: 0.3  }"
     >
       <a
         :href="instagramUrl"

@@ -1,32 +1,20 @@
 <template>
   <div class="product-card">
     <div class="image-section">
-          <Carousel
-            :items-to-show="1"
-            :wrap-around="slides.length > 1"
-            class="carousel"
-            @slide-start="onSlideStart"
-            @slide-end="onSlideEnd"
-          >
-            <Slide v-for="(src, i) in slides" :key="src">
-              <NuxtImg
-                v-if="shouldLoadSlide(i)"
-                v-bind="imageAttrs"
-                :src="src"
-                :alt="`${title} ${i + 1}`"
-                :loading="i === 0 ? 'eager' : 'lazy'"
-                :fetchpriority="i === 0 ? 'high' : 'auto'"
-                decoding="async"
-                class="slide-image"
-              />
-            </Slide>
-            <template #addons>
-              <Navigation />
-              <Pagination />
-            </template>
-          </Carousel>
-
-
+      <ClientOnly>
+        <Carousel :items-to-show="1" :wrap-around="slides.length > 1" class="carousel">
+          <Slide v-for="(src, i) in slides" :key="src">
+            <NuxtImg :src="src" :alt="`${title} ${i + 1}`" loading="lazy" class="slide-image" />
+          </Slide>
+          <template v-if="slides.length > 1" #addons>
+            <Navigation />
+            <Pagination />
+          </template>
+        </Carousel>
+        <template #fallback>
+          <NuxtImg :src="image" :alt="title" loading="lazy" class="slide-image" />
+        </template>
+      </ClientOnly>
     </div>
 
     <div class="info-section">
@@ -59,47 +47,8 @@ const props = defineProps({
   gallery: { type: Array, required: true },
 })
 
-const imageAttrs = {
-  width: 560,
-  height: 560,
-  sizes: '(max-width: 768px) 100vw, 280px',
-  format: 'webp',
-  quality: 80,
-}
-
 const isFavorite = ref(false)
 const slides = computed(() => [...new Set([props.image, ...props.gallery])])
-
-const loadedIndices = ref(new Set([0]))
-
-watch(
-  slides,
-  (list) => {
-    const initial = new Set([0])
-    if (list.length > 1) initial.add(1)
-    loadedIndices.value = initial
-  },
-  { immediate: true },
-)
-
-function markSlidesLoaded(index) {
-  const next = loadedIndices.value
-  next.add(index)
-  next.add((index + 1) % slides.value.length)
-  loadedIndices.value = new Set(next)
-}
-
-function onSlideStart({ slidingToIndex }) {
-  markSlidesLoaded(slidingToIndex)
-}
-
-function onSlideEnd({ currentSlideIndex }) {
-  markSlidesLoaded(currentSlideIndex)
-}
-
-function shouldLoadSlide(index) {
-  return loadedIndices.value.has(index)
-}
 </script>
 
 <style scoped>
