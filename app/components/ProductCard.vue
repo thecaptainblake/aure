@@ -3,7 +3,7 @@
     <div class="image-section">
       <Carousel
         :items-to-show="1"
-        :wrap-around="slides.length > 1"
+        :wrap-around="true"
         class="carousel"
       >
         <Slide v-for="(src, i) in slides" :key="src">
@@ -86,7 +86,9 @@ const slides = computed(() => [...new Set([props.image, ...props.gallery])]);
   background-color: #d3b59f;
 }
 
-.carousel :deep(.carousel__pagination-button--active),
+.carousel :deep(.carousel__pagination-button--active){
+  background-color: #8f744f;
+}
 .carousel :deep(.carousel__prev),
 .carousel :deep(.carousel__next) {
   color: #8f744f;
