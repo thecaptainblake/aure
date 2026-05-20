@@ -45,6 +45,10 @@ export default defineNuxtConfig({
     },
   },
   modules: ['@nuxt/icon', '@nuxt/image', 'motion-v/nuxt'],
+  image: {
+    quality: 80,
+    format: ['webp'],
+  },
   css: [
     'normalize.css/normalize.css',
     '~/assets/css/fonts.css',
