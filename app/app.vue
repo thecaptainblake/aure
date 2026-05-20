@@ -7,62 +7,106 @@
     </div>
 
     <div class="product-pill-filters">
-      <button v-for="cat in categories" :key="cat" type="button" class="filter"
-        :class="{ active: selectedCategory === cat }" @click="selectedCategory = cat">
+      <button
+        v-for="cat in categories"
+        :key="cat"
+        type="button"
+        class="filter"
+        :class="{ active: selectedCategory === cat }"
+        @click="selectedCategory = cat"
+      >
         {{ cat }}
       </button>
     </div>
 
     <div class="product-page">
-      <RevealOnScroll v-for="(product, index) in filteredProducts" :key="product.title" :delay="index * 60">
-        <ProductCard :title="product.title" :description="product.description" :price="product.price"
-          :image="product.image" :gallery="product.gallery" @open-gallery="openLightbox" />
+      <RevealOnScroll
+        v-for="(product, index) in filteredProducts"
+        :key="product.title"
+        :delay="index * 60"
+      >
+        <ProductCard
+          :title="product.title"
+          :description="product.description"
+          :price="product.price"
+          :image="product.image"
+          :gallery="product.gallery"
+          @open-gallery="openLightbox"
+        />
       </RevealOnScroll>
     </div>
     <div class="footer">
-      <a :href="instagramUrl" target="_blank" rel="noopener noreferrer" class="instagram-link"
-        aria-label="Seguir en Instagram">
+      <a
+        :href="instagramUrl"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="instagram-link"
+        aria-label="Seguir en Instagram"
+      >
         <Icon name="mdi:instagram" size="28" />
       </a>
       <p>© {{ new Date().getFullYear() }} Aure Monterrey</p>
     </div>
   </main>
-  <ImageLightbox :visible="lightboxVisible" :images="lightboxImages" :index="lightboxIndex" @close="closeLightbox" />
-  <a :href="whatsappUrl" target="_blank" rel="noopener noreferrer" class="whatsapp-fab"
-    aria-label="Contactar por WhatsApp">
+  <ImageLightbox
+    :visible="lightboxVisible"
+    :images="lightboxImages"
+    :index="lightboxIndex"
+    @close="closeLightbox"
+  />
+  <a
+    :href="whatsappUrl"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="whatsapp-fab"
+    aria-label="Contactar por WhatsApp"
+  >
     <Icon name="mdi:whatsapp" size="28" />
   </a>
-  <a href="#header" class="go-to-top-link" aria-label="Ir al inicio" @click.prevent="scrollToTop">
+  <a
+    href="#header"
+    class="go-to-top-link"
+    aria-label="Ir al inicio"
+    @click.prevent="scrollToTop"
+  >
     <Icon name="mdi:arrow-up" size="28" />
   </a>
 </template>
 
 <script setup>
-import ProductCard from '~/components/ProductCard.vue'
-import { products } from '~/data/products'
+import ProductCard from "~/components/ProductCard.vue";
+import { products } from "~/data/products";
 
-const ALL_CATEGORIES = 'Todos'
+const ALL_CATEGORIES = "Todos";
 
-const selectedCategory = ref(ALL_CATEGORIES)
+const selectedCategory = ref(ALL_CATEGORIES);
 
 const categories = computed(() => {
-  const unique = [...new Set(products.map((p) => p.category))]
-  unique.sort((a, b) => a.localeCompare(b, 'es'))
-  return [ALL_CATEGORIES, ...unique]
-})
+  const unique = [...new Set(products.map((p) => p.category))];
+  unique.sort((a, b) => a.localeCompare(b, "es"));
+  return [ALL_CATEGORIES, ...unique];
+});
 
 const filteredProducts = computed(() => {
-  if (selectedCategory.value === ALL_CATEGORIES) return products
-  return products.filter((p) => p.category === selectedCategory.value)
-})
+  if (selectedCategory.value === ALL_CATEGORIES) return products;
+  return products.filter((p) => p.category === selectedCategory.value);
+});
 
-const { visible: lightboxVisible, images: lightboxImages, index: lightboxIndex, open: openLightbox, close: closeLightbox } = useLightbox()
+const {
+  visible: lightboxVisible,
+  images: lightboxImages,
+  index: lightboxIndex,
+  open: openLightbox,
+  close: closeLightbox,
+} = useLightbox();
 
-const whatsappUrl = 'https://wa.me/528119775806'
-const instagramUrl = 'https://instagram.com/aure.mty'
+const whatsappUrl = "https://wa.me/528119775806";
+const instagramUrl = "https://instagram.com/aure.mty";
 
 function scrollToTop() {
-  document.getElementById('header')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  document
+    .getElementById("header")
+    ?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 </script>
 
@@ -114,7 +158,9 @@ function scrollToTop() {
   background-color: #8f744f;
   color: #ffffff;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .whatsapp-fab {
@@ -131,7 +177,9 @@ function scrollToTop() {
   background-color: #25d366;
   color: #ffffff;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 
   &:hover {
     transform: scale(1.05);
@@ -173,7 +221,10 @@ main {
   background: transparent;
   color: #8f744f;
   cursor: pointer;
-  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
 
   &:hover {
     border-color: #8f744f;
