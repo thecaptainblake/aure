@@ -10,7 +10,10 @@
           <NuxtImg
             :src="src"
             :alt="`${title} ${i + 1}`"
-            loading="lazy"
+            :loading="i === 0 ? 'eager' : 'lazy'"
+            :preload="i === 0 ? { fetchPriority: 'high' } : false"
+            width="600px"
+            heigth="600px"
             class="slide-image"
           />
         </Slide>
