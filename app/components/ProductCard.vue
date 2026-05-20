@@ -87,6 +87,7 @@ const emit = defineEmits(['open-gallery'])
   width: 100%;
   height: 100%;
   display: block;
+  object-fit: cover;
   transition: transform 0.3s ease-in-out;
 
   .image-section:hover & {
