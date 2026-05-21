@@ -9,6 +9,9 @@ dist
 # Node dependencies
 node_modules
 
+##Editors
+.cursor/*
+!.cursor/rules/**
 # Logs
 logs
 *.log
