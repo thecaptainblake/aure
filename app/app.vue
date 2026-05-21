@@ -29,14 +29,14 @@
 
     <div class="product-page">
       <motion.div
-        v-for="(product, index) in filteredProducts"
+        v-for="product in filteredProducts"
         :key="`${selectedCategory}-${product.title}`"
         :initial="{ opacity: 0, y: 20}"
         :while-in-view="{ opacity: 1, y: 0 }"
         :in-view-options="{ once: true }"
         :transition="{ duration: 0.5 }"
       >
-        <ProductCard
+        <ProductCardLazy
           :title="product.title"
           :description="product.description"
           :price="product.price"
@@ -45,6 +45,7 @@
         />
       </motion.div>
     </div>
+    
     <motion.div class="footer"         
       :initial="{ opacity: 0, y: 20}"
       :while-in-view="{ opacity: 1, y: 0 }"
@@ -90,7 +91,6 @@
 
 <script setup>
 import { motion } from "motion-v";
-import ProductCard from "~/components/ProductCard.vue";
 import { products } from "~/data/products";
 
 const ALL_CATEGORIES = "Todos";
@@ -107,24 +107,6 @@ const filteredProducts = computed(() => {
   if (selectedCategory.value === ALL_CATEGORIES) return products;
   return products.filter((p) => p.category === selectedCategory.value);
 });
-
-const EASE_SMOOTH = [0.22, 1, 0.36, 1];
-
-function enterTransition(delay = 0) {
-  return {
-    duration: 0.5,
-    ease: EASE_SMOOTH,
-    delay,
-  };
-}
-
-function revealTransition(index) {
-  return {
-    duration: 0.5,
-    ease: EASE_SMOOTH,
-    delay: index * 0.5,
-  };
-}
 
 const whatsappUrl = "https://wa.me/528119775806";
 const instagramUrl = "https://instagram.com/aure.mty";

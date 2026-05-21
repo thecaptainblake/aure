@@ -2,26 +2,29 @@
   <div class="product-card">
     <div class="image-section">
       <Carousel
+        v-model="currentSlide"
         :items-to-show="1"
         :wrap-around="true"
         class="carousel"
       >
         <Slide v-for="(src, i) in slides" :key="src">
           <NuxtImg
+            v-if="isSlideLoaded(i)"
             :src="src"
             :alt="`${title} ${i + 1}`"
             :loading="i === 0 ? 'eager' : 'lazy'"
-            :preload="i === 0 ? { fetchPriority: 'high' } : false"
-            width="600px"
-            heigth="600px"
+            width="400"
+            height="400" 
+            sizes="(max-width: 640px) 100vw, (max-width: 1200px) 50vw, 400px"
             class="slide-image"
           />
+          <div v-else class="slide-placeholder" aria-hidden="true" />
         </Slide>
         <template #addons>
           <Navigation />
           <Pagination />
         </template>
-      </Carousel>
+      </Carousel> 
     </div>
 
     <div class="info-section">
@@ -49,6 +52,7 @@
 </template>
 
 <script setup>
+import "vue3-carousel/carousel.css";
 import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
 
 const props = defineProps({
@@ -61,6 +65,31 @@ const props = defineProps({
 
 const isFavorite = ref(false);
 const slides = computed(() => [...new Set([props.image, ...props.gallery])]);
+
+const currentSlide = ref(0);
+const loadedSlides = ref(new Set([0]));
+
+function isSlideLoaded(index) {
+  return loadedSlides.value.has(index);
+}
+
+function markSlidesLoaded(...indices) {
+  const next = new Set(loadedSlides.value);
+  let changed = false;
+  for (const index of indices) {
+    if (!next.has(index)) {
+      next.add(index);
+      changed = true;
+    }
+  }
+  if (changed) loadedSlides.value = next;
+}
+
+watch(currentSlide, (index) => {
+  const len = slides.value.length;
+  markSlidesLoaded(index);
+  if (len > 1) markSlidesLoaded((index + 1) % len);
+});
 </script>
 
 <style scoped>
@@ -78,18 +107,23 @@ const slides = computed(() => [...new Set([props.image, ...props.gallery])]);
   height: 100%;
 }
 
-.slide-image {
+.slide-image,
+.slide-placeholder {
   width: 100%;
   height: 100%;
   display: block;
   object-fit: cover;
 }
 
+.slide-placeholder {
+  background: #e8dfd8;
+}
+
 .carousel :deep(.carousel__pagination-button) {
   background-color: #d3b59f;
 }
 
-.carousel :deep(.carousel__pagination-button--active){
+.carousel :deep(.carousel__pagination-button--active) {
   background-color: #8f744f;
 }
 .carousel :deep(.carousel__prev),
