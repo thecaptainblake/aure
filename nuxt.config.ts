@@ -18,13 +18,14 @@ export default defineNuxtConfig({
       },
       link: [
         { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+        { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
         // Canonical: ¡Importante para SEO!
         { rel: "canonical", href: siteUrl },
       ],
       meta: [
         // Metadatos de SEO (Para Google y Buscadores)
         { name: "title", content: siteTitle },
-        { name: "description", content: siteDescription },
+        { name: "description", content: siteDescription },,
         { name: "robots", content: "index, follow" },
 
         // Metadatos Open Graph (Para Facebook, WhatsApp, LinkedIn)
