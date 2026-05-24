@@ -18,15 +18,23 @@
       @scroll="handleGalleryScroll"
     >
       <div v-for="(src, i) in slides" :key="src" class="gallery-slide">
-        <NuxtImg
-          :src="src"
-          :alt="`${title} ${i + 1}`"
-          :loading="i === 0 ? 'eager' : 'lazy'"
-          width="400"
-          height="400"
-          sizes="(max-width: 640px) 100vw, (max-width: 1200px) 50vw, 400px"
-          class="slide-image"
-        />
+        <a
+          :href="src"
+          :data-pswp-width="lightboxImageSize"
+          :data-pswp-height="lightboxImageSize"
+          :aria-label="`Ver foto ${i + 1} de ${title}`"
+          class="slide-link"
+        >
+          <NuxtImg
+            :src="src"
+            :alt="`${title} ${i + 1}`"
+            :loading="i === 0 ? 'eager' : 'lazy'"
+            width="400"
+            height="400"
+            sizes="(max-width: 640px) 100vw, (max-width: 1200px) 50vw, 400px"
+            class="slide-image"
+          />
+        </a>
       </div>
     </div>
 
@@ -78,6 +86,8 @@ const {
   handleGoToPrev,
   handleGoToNext,
 } = useScrollGallery(slidesRef);
+
+const { lightboxImageSize } = usePhotoSwipeLightbox(galleryRef);
 </script>
 
 <style scoped>
@@ -110,6 +120,12 @@ const {
   height: 100%;
   scroll-snap-align: start;
   scroll-snap-stop: always;
+}
+
+.slide-link {
+  display: block;
+  height: 100%;
+  line-height: 0;
 }
 
 .slide-image {
