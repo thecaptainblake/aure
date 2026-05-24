@@ -1,31 +1,6 @@
 <template>
   <div class="product-card">
-    <div class="image-section">
-      <Carousel
-        v-model="currentSlide"
-        :items-to-show="1"
-        :wrap-around="true"
-        class="carousel"
-      >
-        <Slide v-for="(src, i) in slides" :key="src">
-          <NuxtImg
-            v-if="isSlideLoaded(i)"
-            :src="src"
-            :alt="`${title} ${i + 1}`"
-            :loading="i === 0 ? 'eager' : 'lazy'"
-            width="400"
-            height="400"
-            sizes="(max-width: 640px) 100vw, (max-width: 1200px) 50vw, 400px"
-            class="slide-image"
-          />
-          <div v-else class="slide-placeholder" aria-hidden="true" />
-        </Slide>
-        <template #addons>
-          <Navigation />
-          <Pagination />
-        </template>
-      </Carousel>
-    </div>
+    <ProductGallery :slides="gallery" :title="title" />
 
     <div class="info-section">
       <h2 class="product-title">{{ title }}</h2>
@@ -52,11 +27,7 @@
 </template>
 
 <script setup>
-/** Carousel card; loads images for the active slide and the next one on demand. */
-import "vue3-carousel/carousel.css";
-import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
-
-const props = defineProps({
+defineProps({
   title: { type: String, required: true },
   description: { type: String, required: true },
   price: { type: Number, required: true },
@@ -64,77 +35,9 @@ const props = defineProps({
 });
 
 const isFavorite = ref(false);
-const slides = computed(() => [...props.gallery]);
-
-const currentSlide = ref(0);
-const loadedSlides = ref(new Set([0]));
-
-/** @param {number} index */
-function isSlideLoaded(index) {
-  return loadedSlides.value.has(index);
-}
-
-/** Marks slides as ready so NuxtImg can mount. @param {...number} indices */
-function markSlidesLoaded(...indices) {
-  const next = new Set(loadedSlides.value);
-  let hasChanged = false;
-  for (const index of indices) {
-    if (!next.has(index)) {
-      next.add(index);
-      hasChanged = true;
-    }
-  }
-  if (hasChanged) loadedSlides.value = next;
-}
-
-// Preload the active slide and the next one (carousel wrap-around).
-watch(currentSlide, (index) => {
-  const len = slides.value.length;
-  markSlidesLoaded(index);
-  if (len > 1) markSlidesLoaded((index + 1) % len);
-});
 </script>
 
 <style scoped>
-.image-section {
-  overflow: hidden;
-  width: 100%;
-  border-radius: 0.2rem;
-  aspect-ratio: 1 / 1;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  margin-bottom: 0.5rem;
-}
-
-.carousel,
-.carousel :deep(.carousel__viewport) {
-  height: 100%;
-}
-
-.slide-image,
-.slide-placeholder {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-}
-
-.slide-placeholder {
-  background: var(--color-placeholder);
-}
-
-.carousel :deep(.carousel__pagination-button) {
-  background-color: var(--color-border);
-}
-
-.carousel :deep(.carousel__pagination-button--active) {
-  background-color: var(--color-brand);
-}
-
-.carousel :deep(.carousel__prev),
-.carousel :deep(.carousel__next) {
-  color: var(--color-brand);
-}
-
 .info-section {
   text-align: right;
 }

@@ -55,6 +55,7 @@ export default defineNuxtConfig({
     "normalize.css/normalize.css",
     "~/assets/css/fonts.css",
     "~/assets/css/tokens.css",
+    "photoswipe/style.css",
   ],
   components: [
     {
