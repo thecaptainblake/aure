@@ -29,7 +29,7 @@
 <script setup>
 defineProps({
   title: { type: String, required: true },
-  description: { type: String, required: true },
+  description: { type: String, required: false, default: "" },
   price: { type: Number, required: true },
   gallery: { type: Array, required: true },
 });

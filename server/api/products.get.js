@@ -1,6 +1,6 @@
 /** GraphQL: product list with gallery from Hygraph. */
 const PRODUCTS_QUERY =
-  "{ products { id title description category price gallery { url } } }";
+  "{ products(first: 100) { id title description category price gallery { url } } }";
 
 /**
  * GET /api/products — Hygraph proxy; maps gallery to flat URL strings.

@@ -15,7 +15,7 @@
 /** Mounts ProductCard when near the viewport (200px ahead) to reduce initial load. */
 defineProps({
   title: { type: String, required: true },
-  description: { type: String, required: true },
+  description: { type: String, required: false, default: "" },
   price: { type: Number, required: true },
   gallery: { type: Array, required: true },
 });
