@@ -1,27 +1,26 @@
 <template>
   <div class="product-card">
-    <ProductGallery :slides="gallery" :title="title" />
+    <div class="card-img">
+      <ProductGallery :slides="gallery" :title="title" />
+      <button
+        type="button"
+        class="heart"
+        :class="{ on: isFavorite }"
+        :aria-label="
+          isFavorite ? 'Quitar de favoritos' : 'Agregar a favoritos'
+        "
+        @click="isFavorite = !isFavorite"
+      >
+        <Icon
+          :name="isFavorite ? 'mdi:heart' : 'mdi:heart-outline'"
+          size="14"
+        />
+      </button>
+    </div>
 
     <div class="info-section">
       <h2 class="product-title">{{ title }}</h2>
-      <p class="description">{{ description }}</p>
-      <div class="action-bar">
-        <button
-          type="button"
-          class="icon-button"
-          :class="{ 'is-favorite': isFavorite }"
-          :aria-label="
-            isFavorite ? 'Quitar de favoritos' : 'Agregar a favoritos'
-          "
-          @click="isFavorite = !isFavorite"
-        >
-          <Icon
-            :name="isFavorite ? 'mdi:heart' : 'mdi:heart-outline'"
-            size="22"
-          />
-        </button>
-        <span class="price">${{ price.toLocaleString() }}</span>
-      </div>
+      <p class="price">${{ price.toLocaleString() }} MXN</p>
     </div>
   </div>
 </template>
@@ -38,58 +37,66 @@ const isFavorite = ref(false);
 </script>
 
 <style scoped>
+.product-card {
+  background: var(--color-white);
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(182, 151, 120, 0.18);
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.product-card:hover {
+  transform: translateY(-3px) scale(1.04);
+}
+
+.card-img {
+  position: relative;
+}
+
+.heart {
+  position: absolute;
+  top: 9px;
+  right: 9px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.88);
+  color: #9e8577;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.heart:hover,
+.heart.on {
+  color: var(--color-brand-light);
+}
+
 .info-section {
-  text-align: right;
+  padding: 11px 14px 14px;
 }
 
 .product-title {
-  font-family: var(--font-family-nesans);
-  font-size: 1.5rem;
+  font-family: var(--font-family-serif);
+  font-size: 17px;
   font-weight: 400;
-  color: var(--color-brand);
-  text-transform: lowercase;
-  margin: 0;
-}
-
-.description {
-  font-family: var(--font-family-avenir);
-  font-weight: 300;
-  font-size: 0.9rem;
-  line-height: 1.4;
-  color: var(--color-brand-muted);
-  max-width: 350px;
-  margin: 0.5rem 0 0.5rem auto;
-}
-
-.action-bar {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 1rem;
-}
-
-.icon-button {
-  display: flex;
-  padding: 0;
-  border: none;
-  background: none;
-  color: var(--color-brand-light);
-  cursor: pointer;
-  transition: color 0.2s ease;
-}
-
-.icon-button:hover {
-  color: var(--color-brand);
-}
-
-.icon-button.is-favorite {
-  color: var(--color-brand);
+  color: #3a2e26;
+  margin: 0 0 6px;
+  line-height: 1.2;
 }
 
 .price {
-  font-family: var(--font-family-avenir);
-  font-size: 1.2rem;
-  font-weight: 500;
-  color: var(--color-brand);
+  font-family: var(--font-family-sans);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--color-brand-light);
+  letter-spacing: 0.5px;
+  margin: 0;
 }
 </style>

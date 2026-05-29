@@ -38,7 +38,7 @@ function handleSelectCategory(category) {
 }
 
 .filter {
-  font-family: var(--font-family-avenir);
+  font-family: var(--font-family-sans);
   font-weight: 300;
   font-size: 0.875rem;
   padding: 0.5rem 1rem;

@@ -28,7 +28,7 @@ const instagramUrl = appConfig.instagramUrl;
 }
 
 .footer p {
-  font-family: var(--font-family-avenir);
+  font-family: var(--font-family-sans);
   font-weight: 300;
   font-size: 1rem;
   text-align: center;
