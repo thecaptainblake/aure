@@ -29,9 +29,13 @@ export function useScrollGallery(slides) {
     const gallery = galleryRef.value;
     if (!gallery) return;
 
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
     gallery.scrollTo({
       left: index * gallery.clientWidth,
-      behavior: "smooth",
+      behavior: reduceMotion ? "auto" : "smooth",
     });
     activeIndex.value = index;
   }

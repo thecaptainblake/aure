@@ -1,102 +1,47 @@
 <template>
-  <div class="product-card">
-    <div class="card-img">
-      <ProductGallery :slides="gallery" :title="title" />
-      <button
-        type="button"
-        class="heart"
-        :class="{ on: isFavorite }"
-        :aria-label="
-          isFavorite ? 'Quitar de favoritos' : 'Agregar a favoritos'
-        "
-        @click="isFavorite = !isFavorite"
-      >
-        <Icon
-          :name="isFavorite ? 'mdi:heart' : 'mdi:heart-outline'"
-          size="14"
+  <article class="flex h-full flex-col">
+    <NuxtLink :to="`/producto/${product.sku}`" class="group block">
+      <div class="aspect-[4/5] overflow-hidden border border-ink/10 bg-bone">
+        <NuxtImg
+          :src="image.src"
+          :alt="image.alt"
+          width="480"
+          height="600"
+          loading="lazy"
+          class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02] motion-reduce:transform-none"
         />
-      </button>
-    </div>
-
-    <div class="info-section">
-      <h2 class="product-title">{{ title }}</h2>
-      <p class="price">${{ price.toLocaleString() }} MXN</p>
-    </div>
-  </div>
+      </div>
+      <h2 class="mt-3 font-serif text-xl leading-tight text-ink">{{ product.name }}</h2>
+      <p class="mt-2 text-sm text-ink">{{ formatPrice(product.price) }}</p>
+    </NuxtLink>
+    <a
+      :href="href"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="mt-3 inline-flex min-h-11 w-full items-center justify-center border border-ink px-2 text-center text-xs tracking-wide text-ink transition-colors duration-200 hover:border-gold"
+    >
+      Consultar por WhatsApp
+    </a>
+  </article>
 </template>
 
-<script setup>
-defineProps({
-  title: { type: String, required: true },
-  description: { type: String, required: false, default: "" },
-  price: { type: Number, required: true },
-  gallery: { type: Array, required: true },
-});
+<script setup lang="ts">
+import type { Product } from '#shared/catalog'
+import { formatPrice } from '~/utils/price'
 
-const isFavorite = ref(false);
+const props = defineProps<{
+  product: Product
+}>()
+
+const image = computed(
+  () =>
+    props.product.images[0] ?? {
+      src: '/portada.jpg',
+      alt: props.product.name,
+      width: 800,
+      height: 1000,
+    },
+)
+
+const { href } = useProductWhatsApp(() => props.product)
 </script>
-
-<style scoped>
-.product-card {
-  background: var(--color-white);
-  border-radius: 14px;
-  overflow: hidden;
-  border: 1px solid rgba(182, 151, 120, 0.18);
-  cursor: pointer;
-  transition: transform 0.2s;
-}
-
-.product-card:hover {
-  transform: translateY(-3px) scale(1.04);
-}
-
-.card-img {
-  position: relative;
-}
-
-.heart {
-  position: absolute;
-  top: 9px;
-  right: 9px;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 30px;
-  height: 30px;
-  padding: 0;
-  border: none;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.88);
-  color: #9e8577;
-  cursor: pointer;
-  transition: color 0.2s;
-}
-
-.heart:hover,
-.heart.on {
-  color: var(--color-brand-light);
-}
-
-.info-section {
-  padding: 11px 14px 14px;
-}
-
-.product-title {
-  font-family: var(--font-family-serif);
-  font-size: 17px;
-  font-weight: 400;
-  color: #3a2e26;
-  margin: 0 0 6px;
-  line-height: 1.2;
-}
-
-.price {
-  font-family: var(--font-family-sans);
-  font-size: 13px;
-  font-weight: 400;
-  color: var(--color-brand-light);
-  letter-spacing: 0.5px;
-  margin: 0;
-}
-</style>

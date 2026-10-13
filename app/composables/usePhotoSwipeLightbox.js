@@ -1,4 +1,4 @@
-/** Fallback dimensions for PhotoSwipe when Hygraph does not provide width/height. */
+/** Fallback dimensions for PhotoSwipe when an image has no width or height. */
 const LIGHTBOX_IMAGE_SIZE = 1600;
 
 /**
